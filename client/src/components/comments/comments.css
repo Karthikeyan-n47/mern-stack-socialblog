@@ -1,0 +1,137 @@
+.comments {
+  /* width: 100%; */
+  margin-left: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.commentsTitle {
+  font-family: "Lora", serif;
+  font-size: 1.2rem;
+  color: #666;
+}
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.commentWrapper {
+  margin-top: 5px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: rgb(229, 229, 229);
+  border-radius: 10px;
+}
+.commentTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.commentTopLeft {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: 4px;
+}
+.commentUserImg img {
+  margin-right: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.commentUsername {
+  font-family: "Lora", serif;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+.commentCreatedTime {
+  margin-left: 12px;
+  font-family: "Lora", serif;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+.commentTopRight {
+  display: flex;
+  justify-content: space-between;
+}
+.commentTopRightIcon {
+  margin-right: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.editIcon {
+  color: teal;
+}
+.deleteIcon {
+  color: tomato;
+}
+.commentMessage {
+  padding: 5px;
+  margin-left: 20px;
+  font-family: "Lora", serif;
+  font-size: 15px;
+  color: #706e6e;
+}
+.commentUpdateForm {
+  display: flex;
+  justify-content: space-between;
+}
+.commentUpdateInput {
+  width: 90%;
+  border-radius: 5px;
+  border: none;
+  color: #706e6e;
+  /* background-color: #ededed; */
+  background-color: transparent;
+  font-family: "Lora", sans-serif;
+  font-size: 15px;
+  padding: 5px;
+}
+.commentUpdateInput:focus {
+  outline: none;
+}
+.commentUpdateButton {
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(8, 224, 192);
+  color: white;
+  cursor: pointer;
+}
+.commentCreateContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* padding-left: 10px; */
+}
+.commentCreateForm {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(229, 229, 229);
+  padding: 10px;
+  border-radius: 10px;
+}
+.commentCreateInput {
+  width: 80%;
+  border: none;
+  /* border-bottom: 1px solid gray; */
+  font-family: "Lora", sans-serif;
+  font-size: 17px;
+  color: #706e6e;
+  background-color: transparent;
+}
+.commentCreateInput:focus {
+  outline: none;
+}
+.commentCreateButton {
+  width: 10%;
+  /* height: 100%; */
+  border-radius: 0.7em;
+  border: none;
+  background-color: rgb(8, 224, 192);
+  color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
