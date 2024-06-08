@@ -1,17 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import "./singlepost.css";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../../axios";
-import { context } from "../../context/Context";
+// import { context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import Comments from "../comments/Comments";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
+import { useSelector } from "react-redux";
 // import ReactHtmlParser from 'react-html-parser';
 
 export default function SinglePost() {
-  const { user } = useContext(context);
+  // const { user } = useContext(context);
+  const { user } = useSelector((state) => state.user);
   const location = useLocation().pathname.split("/")[2];
   const [post, setPost] = useState({});
   const navigate = useNavigate();

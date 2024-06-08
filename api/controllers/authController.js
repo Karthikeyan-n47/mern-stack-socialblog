@@ -75,6 +75,7 @@ exports.login = CatchAsync(async (req, res, next) => {
       req.body.password,
       userDoc.password
     );
+    // console.log(isPasswordCorrect);
     if (!isPasswordCorrect) {
       return next(
         new AppError("Invalid email or password! Please try again!", 404)

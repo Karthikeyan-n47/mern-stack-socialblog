@@ -135,3 +135,38 @@
   cursor: pointer;
   font-size: 0.7em;
 }
+
+@media (max-width: 500px) {
+  .comments {
+    width: 95%;
+  }
+}
+@media (max-width: 420px) {
+  .commentsTitle {
+    font-size: 1.1rem;
+  }
+  .commentUserImg img {
+    height: 20px;
+    width: 20px;
+  }
+}
+@media (max-width: 370px) {
+  .commentsTitle {
+    font-size: 1rem;
+  }
+  .commentUsername {
+    font-size: 0.6rem;
+  }
+  .commentCreatedTime {
+    font-size: 0.6rem;
+  }
+  .commentMessage {
+    font-size: 0.8rem;
+  }
+  .commentUpdateInput {
+    font-size: 0.8rem;
+  }
+  .commentCreateInput {
+    font-size: 0.8rem;
+  }
+}

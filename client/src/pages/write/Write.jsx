@@ -156,6 +156,7 @@ export default function Write() {
             isMulti
           />
         </div>
+
         <div className="writeCategoryCreate">
           <p className="writeCategoryCreateTitle">Create New Category: </p>
           <input

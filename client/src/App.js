@@ -6,8 +6,8 @@ import Settings from "./pages/settings/Settings";
 import Write from "./pages/write/Write";
 import Single from "./pages/single/Single";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { context } from "./context/Context";
+// import { useContext } from "react";
+// import { context } from "./context/Context";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import Contact from "./pages/contact/Contact";
@@ -15,9 +15,11 @@ import Footer from "./components/footer/Footer";
 import About from "./pages/aboutUs/About";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import Terms from "./pages/termsOfService/Terms";
+import { useSelector } from "react-redux";
 
 export default function App() {
-  const { user } = useContext(context);
+  // const { user } = useContext(context);
+  const { user } = useSelector((state) => state.user);
   return (
     <>
       <TopBar />

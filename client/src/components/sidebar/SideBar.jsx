@@ -1,12 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./sidebar.css";
 import axios from "../../axios";
 import { Link } from "react-router-dom";
-import { context } from "../../context/Context";
+// import { context } from "../../context/Context";
+import { useSelector } from "react-redux";
 
 export default function SideBar() {
   const [categories, setCategories] = useState(null);
-  const { user } = useContext(context);
+  const { user } = useSelector((state) => state.user);
+  // const { user } = useContext(context);
   useEffect(() => {
     const getCat = async () => {
       const res = await axios.get("/category");

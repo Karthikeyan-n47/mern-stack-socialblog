@@ -85,8 +85,10 @@
 }
 .singlePostCategoriesContainer {
   display: flex;
+  width: 80%;
   align-items: center;
-  margin-left: 10px;
+  padding-left: 10px;
+  /* margin-left: 10px; */
 }
 .singlePostCategoriesTitle {
   font-family: "Lora", serif;
@@ -95,6 +97,7 @@
 }
 .singlePostCategoriesContentWrapper {
   display: flex;
+  /* flex-wrap: wrap; */
   align-items: center;
   /* justify-content: space-around; */
   width: 100%;
@@ -108,4 +111,72 @@
   font-family: "Lora", serif;
   font-size: 1.2rem;
   color: #666;
+}
+
+@media (max-width: 690px) {
+  .singlePostWrapper {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .singlePostTitle {
+    font-size: 1.5rem;
+  }
+  .singlePostTitleInput {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .singlePost {
+    width: 100%;
+  }
+  .singlePostCategoriesTitle {
+    font-size: 1.1rem;
+  }
+  .singlePostCategoriesContent {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .singlePostTitle {
+    font-size: 1.2rem;
+  }
+  .singlePostTitleInput {
+    font-size: 1rem;
+  }
+  .singlePostInfo {
+    font-size: 0.8rem;
+  }
+  .singlePostDescInput h2 {
+    font-size: 1.2rem;
+  }
+  .singlePostDescInput p {
+    font-size: 0.8rem;
+  }
+  .singlePostDescInput li {
+    font-size: 0.8rem;
+  }
+  .singlePostDesc h2 {
+    font-size: 1.2rem;
+  }
+  .singlePostDesc p {
+    font-size: 0.8rem;
+  }
+  .singlePostDesc li {
+    font-size: 0.8rem;
+  }
+  .singlePostCategoriesTitle {
+    font-size: 1rem;
+  }
+  .singlePostCategoriesContent {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 350px) {
+  .singlePostCategoriesContent {
+    font-size: 0.6rem;
+  }
 }

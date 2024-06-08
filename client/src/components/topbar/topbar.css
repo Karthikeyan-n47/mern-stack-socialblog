@@ -104,14 +104,17 @@
 }
 
 @media (max-width: 1032px) {
-  /* .topCenter {
-    display: none;
-  } */
-  .topSearchContainer {
+  .topCenter {
     display: none;
   }
+  /* .topSearchContainer {
+    display: none;
+  } */
 }
 @media (max-width: 700px) {
+  .topLeft {
+    justify-content: flex-start;
+  }
   .topSearchContainer {
     display: none;
   }

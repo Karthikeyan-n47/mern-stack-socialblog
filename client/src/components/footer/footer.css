@@ -1,7 +1,7 @@
 .footer {
   bottom: 0;
-  width: 100%;
-  background-color: rgb(243, 240, 240);
+  width: 100vw - 10px;
+  background-color: rgb(240, 233, 233);
   padding: 10px;
   color: rgb(61, 61, 61);
   display: flex;
@@ -80,4 +80,32 @@
   padding: 10px;
   width: 90%;
   height: 100%;
+}
+
+@media (max-width: 800px) {
+  .footerLeft {
+    flex: 3;
+  }
+  .footerRight {
+    flex: 4;
+    /* width: 80%; */
+  }
+  .footerLeftBottom {
+    margin-top: 10px;
+  }
+  /* .footerRightTitle {
+    font-size: 3rem;
+  } */
+}
+
+@media (max-width: 600px) {
+  .footerTop {
+    flex-direction: column;
+  }
+  /* .footerLeft {
+    border-bottom: 1px solid gray;
+  } */
+  .footerRight {
+    margin-top: 1em;
+  }
 }

@@ -1,19 +1,31 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "./topbar.css";
 import { Link } from "react-router-dom";
-import { context } from "../../context/Context";
+// import { context } from "../../context/Context";
 import axios from "../../axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+} from "../../redux/user/userSlice";
 
 export default function TopBar() {
-  const { user, dispatch } = useContext(context);
+  // const { user, dispatch } = useContext(context);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
   const handleLogout = async () => {
+    dispatch(logoutStart());
     try {
       await axios.post("/auth/logout");
-      dispatch({ type: "LOGOUT" });
+      // dispatch({ type: "LOGOUT" });
+      dispatch(logoutSuccess());
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      dispatch(logoutFailure(err.message));
     }
   };
 

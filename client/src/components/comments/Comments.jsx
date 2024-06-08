@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./comments.css";
-import { context } from "../../context/Context";
+// import { context } from "../../context/Context";
 import axios from "../../axios";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
   const [updateMode, setUpdateMode] = useState(false);
   const [message, setMessage] = useState("");
   const [newComment, setNewComment] = useState("");
-  const { user } = useContext(context);
+  const { user } = useSelector((state) => state.user);
+  // const { user } = useContext(context);
   const postId = useLocation().pathname.split("/")[2];
   useEffect(() => {
     const getComments = async () => {

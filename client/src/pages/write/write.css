@@ -105,3 +105,22 @@
   color: white;
   margin-right: 2px;
 }
+
+@media (max-width: 800px) {
+  .writeCategory {
+    margin-top: 100px;
+  }
+  .writeCategoryTitle {
+    font-size: 1rem;
+  }
+  .writeCategorySelect {
+    flex: 3;
+    font-size: 0.8rem;
+  }
+  .writeCategoryCreateTitle {
+    font-size: 1rem;
+  }
+  .writeCategoryCreateInput {
+    font-size: 0.8rem;
+  }
+}
