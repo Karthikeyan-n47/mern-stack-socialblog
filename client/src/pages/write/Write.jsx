@@ -169,7 +169,7 @@ export default function Write() {
             className="writeCategoryCreateButton"
             onClick={handleCategoryCreate}
           >
-            Create
+            Create New Category
           </button>
         </div>
       </div>
