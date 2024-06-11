@@ -94,7 +94,7 @@ export default function TopBar() {
                 />
               </Link>
               <span className=" topListLogout" onClick={handleLogout}>
-                <i class="fa-solid fa-power-off"></i>
+                <i className="fa-solid fa-power-off"></i>
               </span>
             </>
           ) : (

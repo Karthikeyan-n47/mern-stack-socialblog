@@ -85,7 +85,7 @@
 }
 .singlePostCategoriesContainer {
   display: flex;
-  width: 80%;
+  width: 90%;
   align-items: center;
   padding-left: 10px;
   /* margin-left: 10px; */
@@ -94,6 +94,10 @@
   font-family: "Lora", serif;
   font-size: 1.2rem;
   color: #666;
+}
+.singlePostCategoriesSelect {
+  width: 100%;
+  padding-left: 20px;
 }
 .singlePostCategoriesContentWrapper {
   display: flex;
@@ -112,7 +116,36 @@
   font-size: 1.2rem;
   color: #666;
 }
-
+.singlePostCategoryCreate {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  margin-top: 20px;
+}
+.singlePostCategoryCreateTitle {
+  font-family: "Lora", serif;
+  font-size: 1.2rem;
+  color: #666;
+}
+.singlePostCategoryCreateInput {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 10px;
+  width: 60%;
+  margin-bottom: 10px;
+}
+.singlePostCategoryCreateButton {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: teal;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
 @media (max-width: 690px) {
   .singlePostWrapper {
     padding-right: 20px;
@@ -126,6 +159,20 @@
   .singlePostTitleInput {
     font-size: 1.2rem;
   }
+  .singlePostCategoriesTitle,
+  .singlePostCategoryCreateTitle {
+    font-size: 14px;
+  }
+
+  .singlePostCategoryCreateInput {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .singlePostCategoryCreateButton {
+    padding: 8px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 420px) {
@@ -133,10 +180,19 @@
     width: 100%;
   }
   .singlePostCategoriesTitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+  .singlePostCategoriesSelect {
+    font-size: 0.8rem;
   }
   .singlePostCategoriesContent {
     font-size: 0.9rem;
+  }
+  .singlePostCategoryCreateInput {
+    font-size: 0.8rem;
+  }
+  .singlePostCategoryCreateButton {
+    font-size: 0.8rem;
   }
 }
 
@@ -177,6 +233,15 @@
 }
 @media (max-width: 350px) {
   .singlePostCategoriesContent {
+    font-size: 0.6rem;
+  }
+  .singlePostCategoriesSelect {
+    font-size: 0.6rem;
+  }
+  .singlePostCategoryCreateInput {
+    font-size: 0.6rem;
+  }
+  .singlePostCategoryCreateButton {
     font-size: 0.6rem;
   }
 }

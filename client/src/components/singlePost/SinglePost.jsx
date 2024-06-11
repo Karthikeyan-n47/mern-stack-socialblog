@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./singlepost.css";
 import { useEffect, useState } from "react";
 import axios from "../../axios";
+import Select from "react-select";
 // import { context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import Comments from "../comments/Comments";
@@ -20,6 +21,9 @@ export default function SinglePost() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selCategory, setSelCategory] = useState([]);
+  const [newCategory, setNewCategory] = useState("");
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -49,12 +53,40 @@ export default function SinglePost() {
   useEffect(() => {
     const fetchPost = async () => {
       const res = await axios.get(`/posts/${location}`);
+      const cat = await axios.get("/category");
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
+      setCategories(cat.data);
+      if (res?.data?.categories) {
+        setSelCategory(
+          res?.data?.categories?.map((ca) => {
+            return { value: ca, label: ca };
+          })
+        );
+      }
     };
     fetchPost();
   }, [location]);
+
+  const handleCategorySelect = (e) => {
+    setSelCategory(e);
+  };
+
+  const handleCategoryCreate = async () => {
+    if (!newCategory) {
+      return;
+    }
+    try {
+      const res = await axios.post("/category", {
+        name: newCategory,
+      });
+      // console.log(res.data);
+      setCategories([...categories, res?.data]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleDelete = async () => {
     try {
@@ -66,50 +98,34 @@ export default function SinglePost() {
     }
   };
   const handleUpdate = async () => {
+    const postCategories = selCategory.map((cat) => cat.label);
     try {
       const res = await axios.put(`/posts/${post._id}`, {
         title,
         desc,
+        categories: JSON.stringify(postCategories),
       });
-      console.log(res);
+      // console.log(res);
       setUpdateMode(false);
+
+      setPost(res?.data);
+      setTitle(res?.data?.title);
+      setDesc(res?.data?.desc);
+      if (res?.data?.categories) {
+        setSelCategory(
+          res?.data?.categories?.map((ca) => {
+            return { value: ca, label: ca };
+          })
+        );
+      }
       // window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
-
-  /*const handleCommentDelete = async (comment) => {
-    try {
-      const res = await axios.delete(`/comments/${comment._id}`);
-      console.log(res);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-  const handleCommentUpdate = async (comment, e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.put(`/comments/${comment._id}`, {
-        message,
-      });
-      console.log(res);
-      setUpdateCommentMode(false);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-  const handleCommentCreate = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(`/comments/${post._id}`, {
-        message: newComment,
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };*/
+  const options = categories?.map((cat) => {
+    return { value: cat.name, label: cat.name };
+  });
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
@@ -153,12 +169,6 @@ export default function SinglePost() {
           </span>
         </div>
         {updateMode ? (
-          // <input
-          //   type="text"
-          //   className="singlePostDescInput"
-          //   value={desc}
-          //   onChange={(e) => setDesc(e.target.value)}
-          // ></input>
           <ReactQuill
             modules={module}
             value={desc}
@@ -167,7 +177,6 @@ export default function SinglePost() {
             className="singlePostDescInput"
           />
         ) : (
-          // <p className="singlePostDesc">{desc}</p>
           <div
             className="singlePostDesc"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(desc) }}
@@ -180,22 +189,54 @@ export default function SinglePost() {
         )}
       </div>
 
-      {post?.categories && (
+      {updateMode ? (
         <div className="singlePostCategoriesContainer">
           <div className="singlePostCategoriesTitle">Category:</div>
-          <div className="singlePostCategoriesContentWrapper">
-            {post?.categories?.map((cat, i) => {
-              return (
-                <Link
-                  to={`/?cat=${cat}`}
-                  className="link singlePostCategoriesContent"
-                  key={i}
-                >
-                  {cat}
-                </Link>
-              );
-            })}
+          <div className="singlePostCategoriesSelect">
+            <Select
+              value={selCategory}
+              options={options}
+              onChange={handleCategorySelect}
+              isMulti
+              placeholder="Select the categories from dropdown..."
+            />
           </div>
+        </div>
+      ) : (
+        post?.categories && (
+          <div className="singlePostCategoriesContainer">
+            <div className="singlePostCategoriesTitle">Category:</div>
+            <div className="singlePostCategoriesContentWrapper">
+              {post?.categories?.map((cat, i) => {
+                return (
+                  <Link
+                    to={`/?cat=${cat}`}
+                    className="link singlePostCategoriesContent"
+                    key={i}
+                  >
+                    {cat}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )
+      )}
+      {updateMode && (
+        <div className="singlePostCategoryCreate">
+          <p className="singlePostCategoryCreateTitle">Create New Category: </p>
+          <input
+            type="text"
+            placeholder="Enter the category name..."
+            className="singlePostCategoryCreateInput"
+            onChange={(e) => setNewCategory(e.target.value)}
+          />
+          <button
+            className="singlePostCategoryCreateButton"
+            onClick={handleCategoryCreate}
+          >
+            Create
+          </button>
         </div>
       )}
 

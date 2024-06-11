@@ -35,6 +35,7 @@ exports.editPost = CatchAsync(async (req, res, next) => {
     return next(new AppError("Post not found!", 404));
   }
   if (req.id === post.user?._id?.toString()) {
+    req.body.categories = JSON.parse(req.body.categories);
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
       {
