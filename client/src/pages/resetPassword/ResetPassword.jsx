@@ -6,22 +6,25 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const { id, token } = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      return alert("Passwords entered does not match!");
+      return setError("Passwords entered do not match!");
     }
     try {
       await axios.post(`/auth/reset-password/${id}/${token}`, {
         password,
         confirmPassword,
       });
+      setError("");
       navigate("/login");
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      setError(err.message);
     }
   };
   return (
@@ -43,6 +46,7 @@ export default function ResetPassword() {
         <button className="resetPasswordButton" type="submit">
           Reset Password
         </button>
+        {error && <span className="fetchingError">Uh oh! {error}</span>}
       </form>
     </div>
   );

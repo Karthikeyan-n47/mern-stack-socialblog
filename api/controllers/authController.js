@@ -3,8 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/AppError");
-// const Email = require("../utils/Email");
-const nodemailer = require("nodemailer");
+const Email = require("../utils/Email");
 
 const multer = require("multer");
 
@@ -13,25 +12,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 exports.uploadPhoto = upload.single("file");
-
-const sendEmail = async (user, url) => {
-  const transport = nodemailer.createTransport({
-    service: "gmail",
-    secure: true,
-    port: 465,
-    auth: {
-      user: process.env.GMAIL_HOST,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
-  const mailOptions = {
-    from: `Karthik <${process.env.EMAIL_FROM}>`,
-    to: user.email,
-    subject: "Password reset link. Only valid for next 30 mins.",
-    text: `Hello ${user.name}, the link to reset your password is: ${url}  It is only valid for the next 30 minutes.`,
-  };
-  await transport.sendMail(mailOptions);
-};
 
 exports.protect = (req, res, next) => {
   const token = req.cookies.token;
@@ -124,9 +104,8 @@ exports.forgotPassword = CatchAsync(async (req, res, next) => {
   });
 
   const resetUrl = `${process.env.CLIENT_URL}/reset-password/${user._id}/${token}`;
-  console.log(token, resetUrl);
-  await sendEmail(user, resetUrl);
-  // await new Email(user, resetUrl).sendPasswordReset();
+  // console.log(token, resetUrl);
+  await new Email(user, resetUrl).sendPasswordReset();
   res.status(200).json({
     status: "Password reset link has been sent to the registered email",
     data: resetUrl,

@@ -9,10 +9,17 @@ import { useLocation } from "react-router-dom";
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:8800/api/posts" + search);
-      setPosts(res.data);
+      try {
+        const res = await axios.get("http://localhost:8800/api/posts" + search);
+        setPosts(res.data);
+        setError("");
+      } catch (err) {
+        setError(err.message);
+      }
     };
     fetchPosts();
   }, [search]);
@@ -23,6 +30,7 @@ export default function Home() {
         <Posts posts={posts} />
         <SideBar />
       </div>
+      {error && <span className="fetchingError">Uh oh! {error}</span>}
     </>
   );
 }

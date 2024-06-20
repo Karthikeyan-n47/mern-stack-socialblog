@@ -76,3 +76,13 @@
   margin-top: 20px;
   cursor: pointer;
 }
+.updateSuccess {
+  color: lightseagreen;
+  text-align: center;
+  margin-top: 20px;
+}
+.updateError {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}

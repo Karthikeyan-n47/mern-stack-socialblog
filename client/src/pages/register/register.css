@@ -48,3 +48,8 @@
   color: white;
   border-radius: 10px;
 }
+.registerError {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}

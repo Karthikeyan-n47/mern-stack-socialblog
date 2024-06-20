@@ -6,13 +6,16 @@ import { Link } from "react-router-dom";
 
 export default function Posts({ posts }) {
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState("");
   useEffect(() => {
     const getCategory = async () => {
       try {
         const res = await axios.get("/category");
         setCategories(res?.data);
+        setError("");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
+        setError(err.message);
       }
     };
     getCategory();
@@ -29,6 +32,7 @@ export default function Posts({ posts }) {
           );
         })}
       </div>
+      {error && <span className="fetchingError">Uh oh! {error}</span>}
       <div className="posts">
         {posts.map((p, i) => {
           return <Post post={p} key={i} />;

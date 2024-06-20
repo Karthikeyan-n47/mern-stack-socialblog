@@ -16,6 +16,9 @@ export default function Write() {
   const [categories, setCategories] = useState([]);
   const [selCategory, setSelCategory] = useState([]);
   const [newCategory, setNewCategory] = useState("");
+  const [error, setError] = useState("");
+  const [categoryCreateSuccessfull, setCategoryCreateSuccessfull] =
+    useState(false);
   // const { user } = useContext(context);
   const navigate = useNavigate();
 
@@ -46,8 +49,13 @@ export default function Write() {
 
   useEffect(() => {
     const getCategories = async () => {
-      const res = await axios.get("/category");
-      setCategories(res.data);
+      try {
+        const res = await axios.get("/category");
+        setCategories(res.data);
+        setError("");
+      } catch (err) {
+        setError(err.message);
+      }
     };
     getCategories();
   }, []);
@@ -61,13 +69,17 @@ export default function Write() {
       return;
     }
     try {
-      const res = await axios.post("/category", {
+      const res = await axios.post("/categor", {
         name: newCategory,
       });
       // console.log(res.data);
       setCategories([...categories, res.data]);
+      setCategoryCreateSuccessfull(true);
+      setError("");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      setError(err.message);
+      setCategoryCreateSuccessfull(false);
     }
   };
 
@@ -89,7 +101,9 @@ export default function Write() {
       navigate(`/post/${res.data._id}`);
       // console.log(res);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      setError(err.message);
+      setCategoryCreateSuccessfull(false);
     }
   };
 
@@ -172,6 +186,12 @@ export default function Write() {
             Create New Category
           </button>
         </div>
+        {categoryCreateSuccessfull && (
+          <span className="categoryCreateSuccess">
+            Your new category has been successfully created...
+          </span>
+        )}
+        {error && <span className="updateError">Uh oh! {error}</span>}
       </div>
     </div>
   );

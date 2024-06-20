@@ -16,6 +16,7 @@ export default function TopBar() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogout = async () => {
     dispatch(logoutStart());
@@ -23,9 +24,11 @@ export default function TopBar() {
       await axios.post("/auth/logout");
       // dispatch({ type: "LOGOUT" });
       dispatch(logoutSuccess());
+      setError("");
     } catch (err) {
       // console.log(err.message);
       dispatch(logoutFailure(err.message));
+      setError(err.message);
     }
   };
 
@@ -96,6 +99,7 @@ export default function TopBar() {
               <span className=" topListLogout" onClick={handleLogout}>
                 <i className="fa-solid fa-power-off"></i>
               </span>
+              {error && <span className="logoutError">uh oh! {error}</span>}
             </>
           ) : (
             <ul className="topList">

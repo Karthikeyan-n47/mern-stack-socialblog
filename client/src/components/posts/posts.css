@@ -35,6 +35,11 @@
   flex-wrap: wrap;
   margin: 20px;
 }
+.fetchingError {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
 @media (max-width: 1170px) {
   .categoriesTitle {
     font-size: 1.8rem;

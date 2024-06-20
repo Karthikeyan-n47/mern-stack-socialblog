@@ -10,6 +10,7 @@ export default function Comments() {
   const [updateMode, setUpdateMode] = useState(false);
   const [message, setMessage] = useState("");
   const [newComment, setNewComment] = useState("");
+  const [error, setError] = useState("");
   const { user } = useSelector((state) => state.user);
   // const { user } = useContext(context);
   const postId = useLocation().pathname.split("/")[2];
@@ -18,8 +19,10 @@ export default function Comments() {
       try {
         const res = await axios.get(`/comments/${postId}`);
         setComments(res.data);
+        setError("");
       } catch (err) {
-        console.log(err.message);
+        setError(err.message);
+        // console.log(err.message);
       }
     };
     getComments();
@@ -28,9 +31,11 @@ export default function Comments() {
     try {
       await axios.delete(`/comments/${comment._id}`);
       setComments(comments.map((c, index) => (index === i ? null : c)));
+      setError("");
       // window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      setError(err.message);
     }
   };
   const handleUpdate = async (comment, e, i) => {
@@ -43,9 +48,11 @@ export default function Comments() {
       setComments(
         comments.map((c, index) => (index === i ? updatedComment.data : c))
       );
+      setError("");
       // window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      setError(err.message);
     }
   };
   const handleCreate = async (e) => {
@@ -57,8 +64,10 @@ export default function Comments() {
       setComments([...comments, createdComment.data]);
       // setNewComment("");
       // window.location.reload();
+      setError("");
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      setError(err.message);
     }
   };
   return (
@@ -138,6 +147,7 @@ export default function Comments() {
           </form>
         )}
       </div>
+      {error && <span className="updateError">Uh oh! {error}</span>}
     </div>
   );
 }

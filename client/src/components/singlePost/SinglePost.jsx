@@ -24,6 +24,7 @@ export default function SinglePost() {
   const [categories, setCategories] = useState([]);
   const [selCategory, setSelCategory] = useState([]);
   const [newCategory, setNewCategory] = useState("");
+  const [error, setError] = useState("");
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -52,18 +53,23 @@ export default function SinglePost() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await axios.get(`/posts/${location}`);
-      const cat = await axios.get("/category");
-      setPost(res.data);
-      setTitle(res.data.title);
-      setDesc(res.data.desc);
-      setCategories(cat.data);
-      if (res?.data?.categories) {
-        setSelCategory(
-          res?.data?.categories?.map((ca) => {
-            return { value: ca, label: ca };
-          })
-        );
+      try {
+        const res = await axios.get(`/posts/${location}`);
+        const cat = await axios.get("/category");
+        setPost(res.data);
+        setTitle(res.data.title);
+        setDesc(res.data.desc);
+        setCategories(cat.data);
+        if (res?.data?.categories) {
+          setSelCategory(
+            res?.data?.categories?.map((ca) => {
+              return { value: ca, label: ca };
+            })
+          );
+        }
+        setError("");
+      } catch (err) {
+        setError(err.message);
       }
     };
     fetchPost();
@@ -83,8 +89,9 @@ export default function SinglePost() {
       });
       // console.log(res.data);
       setCategories([...categories, res?.data]);
+      setError("");
     } catch (err) {
-      console.log(err);
+      setError(err.message);
     }
   };
 
@@ -94,7 +101,8 @@ export default function SinglePost() {
       console.log(res);
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      setError(err.message);
     }
   };
   const handleUpdate = async () => {
@@ -118,9 +126,11 @@ export default function SinglePost() {
           })
         );
       }
+      setError("");
       // window.location.reload();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      setError(err.message);
     }
   };
   const options = categories?.map((cat) => {
@@ -239,7 +249,7 @@ export default function SinglePost() {
           </button>
         </div>
       )}
-
+      {error && <span className="updateError">Uh oh! {error}</span>}
       <Comments />
     </div>
   );

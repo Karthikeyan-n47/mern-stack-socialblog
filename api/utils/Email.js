@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 
 module.exports = class Email {
   constructor(user, url) {
-    super();
     (this.to = user.email),
       (this.url = url),
       (this.name = user.username),

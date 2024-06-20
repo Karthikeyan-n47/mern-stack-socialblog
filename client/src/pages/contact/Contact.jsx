@@ -7,6 +7,7 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,9 +19,11 @@ export default function Contact() {
         message,
       });
       console.log(res);
+      setError("");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      setError(err.message);
     }
   };
 
@@ -52,6 +55,7 @@ export default function Contact() {
         <button className="contactButton" type="submit">
           Submit
         </button>
+        {error && <span className="contactError">Uh oh! {error}</span>}
       </form>
     </div>
   );

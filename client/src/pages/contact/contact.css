@@ -41,3 +41,8 @@
   cursor: not-allowed;
   background-color: rgb(193, 255, 246);
 }
+.contactError {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}

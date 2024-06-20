@@ -7,7 +7,7 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +19,11 @@ export default function Register() {
         password,
       });
       console.log(res.data);
+      setError("");
       res.data && window.location.replace("/login");
     } catch (err) {
-      setError(true);
-      console.log(err);
+      setError(err.message);
+      // console.log(err);
     }
   };
   return (
@@ -56,7 +57,7 @@ export default function Register() {
           Login
         </Link>
       </button>
-      {error && window.alert("Somthing went wrong!")}
+      {error && <span className="registerError">uh oh! {error}</span>}
     </div>
   );
 }

@@ -22,6 +22,8 @@ export default function Settings() {
   const [email, setEmail] = useState(user.email || "");
   const [password, setPassword] = useState("");
   const [about, setAbout] = useState(user.about || "");
+  const [error, setError] = useState("");
+  const [updateSuccessfull, setUpdateSuccessfull] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,10 +47,14 @@ export default function Settings() {
       // console.log(res);
       // dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
       dispatch(updateUserSuccess(res.data));
+      setUpdateSuccessfull(true);
+      setError("");
     } catch (err) {
       // console.log(err);
       // dispatch({ type: "UPDATE_FAILURE" });
       dispatch(updateUserFailure(err.message));
+      setError(err.message);
+      setUpdateSuccessfull(false);
     }
   };
   const handleDelete = async () => {
@@ -58,9 +64,11 @@ export default function Settings() {
       console.log(res.data);
       // dispatch({ type: "LOGOUT" });
       dispatch(deleteUserSuccess);
+      setError("");
     } catch (err) {
       // console.log(err.message);
       dispatch(deleteUserFailure(err.message));
+      setError(err.message);
     }
   };
   return (
@@ -122,6 +130,12 @@ export default function Settings() {
           <button className="settingsSubmit" type="submit">
             Update
           </button>
+          {updateSuccessfull && (
+            <span className="updateSuccess">
+              Your profile has been successfully updated...
+            </span>
+          )}
+          {error && <span className="updateError">Uh oh! {error}</span>}
         </form>
       </div>
       <SideBar />

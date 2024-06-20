@@ -8,12 +8,18 @@ import { useSelector } from "react-redux";
 export default function SideBar() {
   const [categories, setCategories] = useState(null);
   const { user } = useSelector((state) => state.user);
+  const [error, setError] = useState("");
   // const { user } = useContext(context);
   useEffect(() => {
     const getCat = async () => {
-      const res = await axios.get("/category");
-      // console.log(res);
-      setCategories(res.data);
+      try {
+        const res = await axios.get("/category");
+        // console.log(res);
+        setCategories(res.data);
+        setError("");
+      } catch (err) {
+        setError(err.message);
+      }
     };
     getCat();
   }, []);
@@ -52,6 +58,7 @@ export default function SideBar() {
           <i className="sidebarIcon fa-brands fa-square-instagram"></i>
         </div>
       </div>
+      {error && <span className="fetchingError">Uh oh! {error}</span>}
     </div>
   );
 }

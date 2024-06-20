@@ -13,6 +13,7 @@ import {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   // const { dispatch, isFetching } = useContext(context);
   const { loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -28,10 +29,12 @@ export default function Login() {
       // console.log(res);
       // dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       dispatch(loginSuccess(res.data));
+      setError("");
     } catch (err) {
       // console.log(err);
       // dispatch({ type: "LOGIN_FAILURE" });
       dispatch(loginFailure(err.response.data));
+      setError(err.message);
     }
   };
 
@@ -57,6 +60,7 @@ export default function Login() {
         <button className="loginButton" type="submit" disabled={loading}>
           Login
         </button>
+        {error && <span className="loginError">Uh oh! {error}</span>}
       </form>
       <button className="loginRegisterButton">
         <Link to={"/register"} className="link">

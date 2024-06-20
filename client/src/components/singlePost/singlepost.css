@@ -85,8 +85,9 @@
 }
 .singlePostCategoriesContainer {
   display: flex;
-  width: 90%;
+  width: calc(100% - 10px);
   align-items: center;
+  /* flex-wrap: wrap; */
   padding-left: 10px;
   /* margin-left: 10px; */
 }
@@ -101,10 +102,11 @@
 }
 .singlePostCategoriesContentWrapper {
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-around; */
+  justify-content: center;
   width: 100%;
+  /* margin: 10px 0; */
 }
 .singlePostCategoriesContent {
   /* width: 20%; */
@@ -145,6 +147,11 @@
   color: white;
   font-size: 12px;
   cursor: pointer;
+}
+.updateError {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
 }
 @media (max-width: 690px) {
   .singlePostWrapper {

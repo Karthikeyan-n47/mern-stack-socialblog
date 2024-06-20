@@ -4,6 +4,8 @@ import axios from "../../axios";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [emailSentSuccess, setEmailSentSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,8 +13,12 @@ export default function ForgotPassword() {
       await axios.post("/auth/forgot-password", {
         email,
       });
+      setError("");
+      setEmailSentSuccess(true);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
+      setError(err.message);
+      setEmailSentSuccess(false);
     }
   };
   return (
@@ -28,6 +34,12 @@ export default function ForgotPassword() {
         <button className="forgotPasswordButton" type="submit">
           Submit
         </button>
+        {emailSentSuccess && (
+          <span className="emailSuccess">
+            Your email address has been successfully sent..
+          </span>
+        )}
+        {error && <span className="emailFailure">Uh oh! {error}</span>}
       </form>
     </div>
   );

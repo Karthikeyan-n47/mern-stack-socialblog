@@ -143,7 +143,11 @@
   cursor: pointer;
   font-size: 0.7em;
 }
-
+.updateError {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
 @media (max-width: 500px) {
   .comments {
     width: 95%;
