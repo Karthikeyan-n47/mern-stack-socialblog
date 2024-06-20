@@ -1,6 +1,13 @@
 .post {
-  width: 44%;
+  width: 40%;
   margin: 0px 25px 40px 25px;
+  /* -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68); */
+  -webkit-box-shadow: 0px 0px 19px -4px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 0px 0px 19px -4px rgba(0, 0, 0, 0.55);
+  box-shadow: 0px 0px 19px -4px rgba(0, 0, 0, 0.55);
+  border-radius: 10px;
+  padding: 10px;
 }
 .postImg {
   width: 100%;
@@ -51,7 +58,7 @@
 
 @media (max-width: 1193px) {
   .post {
-    width: 40%;
+    width: 100%;
   }
 }
 @media (max-width: 825px) {
@@ -59,5 +66,11 @@
     width: 100%;
     margin: 0px;
     margin-top: 1.5rem;
+  }
+  .postTitle {
+    font-size: 17px;
+  }
+  .postDesc {
+    font-size: 12px;
   }
 }
